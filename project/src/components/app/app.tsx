@@ -1,8 +1,13 @@
 import MainScreen from '../main/main';
+import {GuitarType} from '../../types/guitar';
 
-function App(): JSX.Element {
+type AppScreenProps = {
+  products: GuitarType[];
+}
+
+function App({products}: AppScreenProps): JSX.Element {
   return (
-    <MainScreen/>
+    <MainScreen products={products} />
   );
 }
 
