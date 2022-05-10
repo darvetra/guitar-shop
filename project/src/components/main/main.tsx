@@ -1,4 +1,6 @@
 import {Fragment} from 'react';
+import {Link} from 'react-router-dom';
+
 import {GuitarType} from '../../types/guitar';
 
 import Header from '../header/header';
@@ -20,9 +22,11 @@ function MainScreen({products}: ProductsProps): JSX.Element {
         <div className="container">
           <h1 className="page-content__title title title--bigger">Каталог гитар</h1>
           <ul className="breadcrumbs page-content__breadcrumbs">
-            <li className="breadcrumbs__item"><a className="link" href="./main.html">Главная</a>
+            <li className="breadcrumbs__item">
+              <Link className="link" to="./main.html">Главная</Link>
             </li>
-            <li className="breadcrumbs__item"><a className="link">Каталог</a>
+            <li className="breadcrumbs__item">
+              <Link className="link" to="/">Каталог</Link>
             </li>
           </ul>
           <div className="catalog">
@@ -96,16 +100,16 @@ function MainScreen({products}: ProductsProps): JSX.Element {
             <div className="pagination page-content__pagination">
               <ul className="pagination__list">
                 <li className="pagination__page pagination__page--active">
-                  <a className="link pagination__page-link" href="1">1</a>
+                  <Link className="link pagination__page-link" to="1">1</Link>
                 </li>
                 <li className="pagination__page">
-                  <a className="link pagination__page-link" href="2">2</a>
+                  <Link className="link pagination__page-link" to="2">2</Link>
                 </li>
                 <li className="pagination__page">
-                  <a className="link pagination__page-link" href="3">3</a>
+                  <Link className="link pagination__page-link" to="3">3</Link>
                 </li>
                 <li className="pagination__page pagination__page--next" id="next">
-                  <a className="link pagination__page-link" href="2">Далее</a>
+                  <Link className="link pagination__page-link" to="2">Далее</Link>
                 </li>
               </ul>
             </div>
