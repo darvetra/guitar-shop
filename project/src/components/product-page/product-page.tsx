@@ -6,13 +6,16 @@ type ProductCardProps = {
   product: GuitarType;
 }
 
+// Странный баг. Не отображается картинка товара, путь верный. При инспектирование кода, картинка есть?!
+// Остальные поля продукта - ОК.
+
 function ProductPage({product}: ProductCardProps): JSX.Element {
-  const {name, previewImage, price} = product;
+  const {name, vendorCode, description, previewImage, stringCount, price} = product;
 
   return (
     <main className="page-content">
       <div className="container">
-        <h1 className="page-content__title title title--bigger">Товар</h1>
+        <h1 className="page-content__title title title--bigger">{name}</h1>
         <ul className="breadcrumbs page-content__breadcrumbs">
           <li className="breadcrumbs__item">
             <Link className="link" to="./main.html">Главная</Link>
@@ -21,13 +24,20 @@ function ProductPage({product}: ProductCardProps): JSX.Element {
             <Link className="link" to="./main.html">Каталог</Link>
           </li>
           <li className="breadcrumbs__item">
-            <Link className="link" to="/">Товар</Link>
+            <Link className="link" to="/">{name}</Link>
           </li>
         </ul>
         <div className="product-container">
-          <img className="product-container__img" src="img/content/catalog-product-2.jpg" srcSet="img/content/catalog-product-2@2x.jpg 2x" width="90" height="235" alt="" />
+          <img
+            className="product-container__img"
+            src={previewImage}
+            srcSet="img/content/catalog-product-2@2x.jpg 2x"
+            width="90"
+            height="235"
+            alt={name}
+          />
           <div className="product-container__info-wrapper">
-            <h2 className="product-container__title title title--big title--uppercase">СURT Z30 Plus</h2>
+            <h2 className="product-container__title title title--big title--uppercase">{name}</h2>
             <div className="rate product-container__rating">
               <svg width="14" height="14" aria-hidden="true">
                 <use xlinkHref="#icon-full-star"></use>
@@ -53,7 +63,7 @@ function ProductPage({product}: ProductCardProps): JSX.Element {
                 <table className="tabs__table">
                   <tr className="tabs__table-row">
                     <td className="tabs__title">Артикул:</td>
-                    <td className="tabs__value">SO754565</td>
+                    <td className="tabs__value">{vendorCode}</td>
                   </tr>
                   <tr className="tabs__table-row">
                     <td className="tabs__title">Тип:</td>
@@ -61,16 +71,16 @@ function ProductPage({product}: ProductCardProps): JSX.Element {
                   </tr>
                   <tr className="tabs__table-row">
                     <td className="tabs__title">Количество струн:</td>
-                    <td className="tabs__value">6 струнная</td>
+                    <td className="tabs__value">{stringCount} струнная</td>
                   </tr>
                 </table>
-                <p className="tabs__product-description hidden">Гитара подходит как для старта обучения, так и для домашних занятий или использования в полевых условиях, например, в походах или для проведения уличных выступлений. Доступная стоимость, качество и надежная конструкция, а также приятный внешний вид, который сделает вас звездой вечеринки.</p>
+                <p className="tabs__product-description hidden">{description}</p>
               </div>
             </div>
           </div>
           <div className="product-container__price-wrapper">
             <p className="product-container__price-info product-container__price-info--title">Цена:</p>
-            <p className="product-container__price-info product-container__price-info--value">52 000 ₽</p>
+            <p className="product-container__price-info product-container__price-info--value">{price} ₽</p>
             <Link className="button button--red button--big product-container__button" to="#">Добавить в корзину</Link>
           </div>
         </div>
