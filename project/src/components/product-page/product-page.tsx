@@ -18,10 +18,10 @@ function ProductPage({product}: ProductCardProps): JSX.Element {
         <h1 className="page-content__title title title--bigger">{name}</h1>
         <ul className="breadcrumbs page-content__breadcrumbs">
           <li className="breadcrumbs__item">
-            <Link className="link" to="./main.html">Главная</Link>
+            <Link className="link" to="/">Главная</Link>
           </li>
           <li className="breadcrumbs__item">
-            <Link className="link" to="./main.html">Каталог</Link>
+            <Link className="link" to="/">Каталог</Link>
           </li>
           <li className="breadcrumbs__item">
             <Link className="link" to="/">{name}</Link>
