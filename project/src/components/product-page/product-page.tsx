@@ -1,17 +1,19 @@
 import {GuitarType} from '../../types/guitar';
+import {ReviewType} from '../../types/review';
 
 import Reviews from '../reviews/reviews';
 
 import {Link} from 'react-router-dom';
 
 type ProductCardProps = {
-  product: GuitarType;
+  product: GuitarType,
+  reviews: ReviewType[],
 }
 
 // Странный баг. Не отображается картинка товара, путь верный. При инспектирование кода, картинка есть?!
 // Остальные поля продукта - ОК.
 
-function ProductPage({product}: ProductCardProps): JSX.Element {
+function ProductPage({product, reviews}: ProductCardProps): JSX.Element {
   const {name, vendorCode, description, previewImage, stringCount, price} = product;
 
   return (
@@ -87,7 +89,7 @@ function ProductPage({product}: ProductCardProps): JSX.Element {
           </div>
         </div>
 
-        <Reviews />
+        <Reviews reviews={reviews} />
 
       </div>
     </main>
