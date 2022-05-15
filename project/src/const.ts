@@ -5,3 +5,8 @@ export enum AppRoute {
   // Cart = '/cart',
   NotFound = '/404',
 }
+
+export const TabsParams = {
+  CHARACTERISTICS: 'Характеристики',
+  DESCRIPTION: 'Описание',
+};

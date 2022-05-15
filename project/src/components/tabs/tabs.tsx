@@ -1,34 +1,35 @@
+import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import {GuitarType} from '../../types/guitar';
+
+import {getTabsNames} from '../../utils';
+
+import TabCharacteristics from '../tabs/tab-characteristics';
+import TabDescription from '../tabs/tab-description';
 
 type TabsProps = {
   currentProduct: GuitarType;
 };
 
 function Tabs({currentProduct}: TabsProps): JSX.Element {
-  const {vendorCode, description, stringCount} = currentProduct;
+  const tabs = ['characteristics', 'description'];
+  const [active, setActive] = useState(tabs[0]);
 
   return (
     <div className="tabs">
-      <Link className="button button--medium tabs__button" to="#characteristics">Характеристики</Link>
-      <Link className="button button--black-border button--medium tabs__button" to="#description">Описание</Link>
+
+      {tabs.map((tab) => (
+        <Link to={`#${tab}`} className={`button button--medium tabs__button ${tab !== active && 'button--black-border'}`} onClick={() => setActive(tab)} key={tab}>
+          {getTabsNames(tab)}
+        </Link>
+      ))}
+
       <div className="tabs__content" id="characteristics">
-        <table className="tabs__table">
-          <tr className="tabs__table-row">
-            <td className="tabs__title">Артикул:</td>
-            <td className="tabs__value">{vendorCode}</td>
-          </tr>
-          <tr className="tabs__table-row">
-            <td className="tabs__title">Тип:</td>
-            <td className="tabs__value">Электрогитара</td>
-          </tr>
-          <tr className="tabs__table-row">
-            <td className="tabs__title">Количество струн:</td>
-            <td className="tabs__value">{stringCount} струнная</td>
-          </tr>
-        </table>
-        <p className="tabs__product-description hidden">{description}</p>
+
+        {active === tabs[0] && <TabCharacteristics currentProduct={currentProduct} />}
+        {active === tabs[1] && <TabDescription currentProduct={currentProduct} />}
+
       </div>
     </div>
   );
