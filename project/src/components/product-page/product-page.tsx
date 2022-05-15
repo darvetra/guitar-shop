@@ -2,6 +2,7 @@ import {GuitarType} from '../../types/guitar';
 import {ReviewType} from '../../types/review';
 
 import Reviews from '../reviews/reviews';
+import Tabs from '../tabs/tabs';
 
 import {Link} from 'react-router-dom';
 
@@ -14,7 +15,7 @@ type ProductCardProps = {
 // Остальные поля продукта - ОК.
 
 function ProductPage({product, reviews}: ProductCardProps): JSX.Element {
-  const {name, vendorCode, description, previewImage, stringCount, price} = product;
+  const {name, previewImage, price} = product;
 
   return (
     <main className="page-content">
@@ -60,27 +61,9 @@ function ProductPage({product, reviews}: ProductCardProps): JSX.Element {
               </svg>
               <p className="visually-hidden">Оценка: Хорошо</p>
             </div>
-            <div className="tabs">
-              <Link className="button button--medium tabs__button" to="#characteristics">Характеристики</Link>
-              <Link className="button button--black-border button--medium tabs__button" to="#description">Описание</Link>
-              <div className="tabs__content" id="characteristics">
-                <table className="tabs__table">
-                  <tr className="tabs__table-row">
-                    <td className="tabs__title">Артикул:</td>
-                    <td className="tabs__value">{vendorCode}</td>
-                  </tr>
-                  <tr className="tabs__table-row">
-                    <td className="tabs__title">Тип:</td>
-                    <td className="tabs__value">Электрогитара</td>
-                  </tr>
-                  <tr className="tabs__table-row">
-                    <td className="tabs__title">Количество струн:</td>
-                    <td className="tabs__value">{stringCount} струнная</td>
-                  </tr>
-                </table>
-                <p className="tabs__product-description hidden">{description}</p>
-              </div>
-            </div>
+
+            <Tabs currentProduct={product} />
+
           </div>
           <div className="product-container__price-wrapper">
             <p className="product-container__price-info product-container__price-info--title">Цена:</p>
