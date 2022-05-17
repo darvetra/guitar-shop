@@ -5,6 +5,7 @@ import {GuitarType} from '../../types/guitar';
 
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import Pagination from '../pagination/pagination';
 import ProductCard from '../product-card/product-card';
 
 type ProductsProps = {
@@ -97,22 +98,9 @@ function MainScreen({products}: ProductsProps): JSX.Element {
               {products.map((product) => <ProductCard product={product} key={product.id} />)}
 
             </div>
-            <div className="pagination page-content__pagination">
-              <ul className="pagination__list">
-                <li className="pagination__page pagination__page--active">
-                  <Link className="link pagination__page-link" to="1">1</Link>
-                </li>
-                <li className="pagination__page">
-                  <Link className="link pagination__page-link" to="2">2</Link>
-                </li>
-                <li className="pagination__page">
-                  <Link className="link pagination__page-link" to="3">3</Link>
-                </li>
-                <li className="pagination__page pagination__page--next" id="next">
-                  <Link className="link pagination__page-link" to="2">Далее</Link>
-                </li>
-              </ul>
-            </div>
+
+            <Pagination />
+
           </div>
         </div>
       </main>
