@@ -4,9 +4,9 @@ export enum ActionType {
   GetProductList = 'catalog/getProductList',
 }
 
-export type GetProductListAction = {
+export type GetProductListActionType = {
   type: ActionType.GetProductList;
   payload: GuitarType[];
 };
 
-export type Actions = GetProductListAction;
+export type Actions = GetProductListActionType;

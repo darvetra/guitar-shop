@@ -1,7 +1,7 @@
-import {ActionType, GetProductListAction} from '../types/action';
+import {ActionType, GetProductListActionType} from '../types/action';
 import {GuitarType} from '../types/guitar';
 
-export const getProductListAction = (guitarList: GuitarType[]): GetProductListAction => ({
+export const getProductList = (guitarList: GuitarType[]): GetProductListActionType => ({
   type: ActionType.GetProductList,
   payload: guitarList,
 });
