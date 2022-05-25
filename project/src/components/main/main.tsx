@@ -1,18 +1,53 @@
 import {Fragment} from 'react';
 import {Link} from 'react-router-dom';
+import {Dispatch} from 'redux';
+import {connect, ConnectedProps} from 'react-redux';
 
 import {GuitarType} from '../../types/guitar';
+
+import {setProducts} from '../../store/action';
+
+import {State} from '../../types/state';
+import {Actions} from '../../types/action';
 
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import Pagination from '../pagination/pagination';
 import ProductCard from '../product-card/product-card';
 
-type ProductsProps = {
+type MainScreenProps = {
   products: GuitarType[];
 }
 
-function MainScreen({products}: ProductsProps): JSX.Element {
+const mapStateToProps = ({pageSize, totalProductsCount, currentPage}: State) => ({
+  pageSize,
+  totalProductsCount,
+  currentPage,
+});
+
+// Без использования bindActionCreators
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+  onChangePage(products: GuitarType[]) {
+    dispatch(setProducts(products));
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & MainScreenProps;
+
+function MainScreen(props: ConnectedComponentProps): JSX.Element {
+  const {products, pageSize, totalProductsCount, currentPage} = props;
+
+  const pagesCount = Math.ceil(totalProductsCount / pageSize);
+  const pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
+  }
+
+  // eslint-disable-next-line no-console
+  console.log(currentPage);
 
   return (
     <Fragment>
@@ -99,7 +134,7 @@ function MainScreen({products}: ProductsProps): JSX.Element {
 
             </div>
 
-            <Pagination />
+            <Pagination pages={pages} currentPage={currentPage} />
 
           </div>
         </div>
@@ -111,4 +146,5 @@ function MainScreen({products}: ProductsProps): JSX.Element {
   );
 }
 
-export default MainScreen;
+export {MainScreen};
+export default connector(MainScreen);

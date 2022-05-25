@@ -24,6 +24,9 @@ function App({products, product, reviews}: AppScreenProps): JSX.Element {
         <Route exact path={AppRoute.Product}>
           <ProductPage product={product} reviews={reviews} />
         </Route>
+        <Route exact path={AppRoute.Catalog}>
+          <MainScreen products={products} />
+        </Route>
         <Route>
           <NotFound />
         </Route>
