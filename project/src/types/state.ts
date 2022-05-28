@@ -1,8 +1,8 @@
 import {GuitarType} from '../types/guitar';
 
 export type State = {
-  productList: GuitarType[],
+  guitars: GuitarType[],
   pageSize: number,
   totalProductsCount: number,
-  currentPage : number,
+  currentPage: number,
 };

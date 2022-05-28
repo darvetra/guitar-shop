@@ -1,17 +1,22 @@
-import {ActionType, GetProductListActionType, SetProductsActionType, SetCurrentPageActionType} from '../types/action';
+import {ActionType} from '../types/action';
 import {GuitarType} from '../types/guitar';
 
-export const getProductList = (guitarList: GuitarType[]): GetProductListActionType => ({
+export const getProductList = (guitars: GuitarType[]) => ({
   type: ActionType.GetProductList,
-  payload: guitarList,
-});
+  payload: guitars,
+} as const);
 
-export const setProducts = (guitarList: GuitarType[]): SetProductsActionType => ({
+export const loadGuitars = (guitars: GuitarType[]) => ({
+  type: ActionType.LoadGuitars,
+  payload: guitars,
+} as const);
+
+export const setProducts = (guitars: GuitarType[]) => ({
   type: ActionType.SetProducts,
-  payload: guitarList,
-});
+  payload: guitars,
+} as const);
 
-export const setCurrentPage = (currentPage: number): SetCurrentPageActionType => ({
+export const setCurrentPage = (currentPage: number) => ({
   type: ActionType.SetCurrentPage,
   payload: currentPage,
-});
+} as const);

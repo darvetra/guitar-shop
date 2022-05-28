@@ -1,24 +1,14 @@
-import {GuitarType} from '../types/guitar';
+import {getProductList, loadGuitars, setProducts, setCurrentPage} from '../store/action';
 
 export enum ActionType {
   GetProductList = 'catalog/getProductList',
   SetProducts = 'catalog/setProducts',
   SetCurrentPage = 'catalog/setCurrentPage',
+  LoadGuitars = 'data/loadGuitars',
 }
 
-export type GetProductListActionType = {
-  type: ActionType.GetProductList;
-  payload: GuitarType[];
-};
-
-export type SetProductsActionType = {
-    type: ActionType.SetProducts;
-    payload: GuitarType[];
-};
-
-export type SetCurrentPageActionType = {
-  type: ActionType.SetCurrentPage;
-  payload: number;
-};
-
-export type Actions = GetProductListActionType | SetProductsActionType | SetCurrentPageActionType;
+export type Actions =
+  | ReturnType<typeof getProductList>
+  | ReturnType<typeof loadGuitars>
+  | ReturnType<typeof setProducts>
+  | ReturnType<typeof setCurrentPage>;
