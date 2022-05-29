@@ -1,20 +1,18 @@
 import {ActionType, Actions} from '../types/action';
 import {State} from '../types/state';
 
-// убрать, когда подключишь сервер
-import {guitarList} from '../mocks/guitars';
-
 const initialState = {
-  guitars: guitarList,
+  guitars: [],
   pageSize: 3,
   totalProductsCount: 9,
   currentPage: 1,
+  isDataLoaded: false,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
   switch (action.type) {
-    case ActionType.GetProductList:
-      return {...state, guitars: action.payload};
+    // case ActionType.GetProductList:
+    //   return {...state, guitars: action.payload};
     case ActionType.SetProducts:
       return {...state, guitars: action.payload};
     case ActionType.LoadGuitars:
