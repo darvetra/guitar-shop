@@ -1,5 +1,5 @@
 import {ThunkActionResult} from '../types/action';
-import {GuitarType} from '../types/guitar';
+import {GuitarType} from '../types/types';
 import {APIRoute} from '../const';
 import {loadGuitars} from './action';
 

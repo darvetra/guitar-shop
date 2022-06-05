@@ -1,7 +1,5 @@
 import {Link} from 'react-router-dom';
-
-import {ReviewType} from '../../types/review';
-
+import {ReviewType} from '../../types/types';
 import Review from './review';
 
 type ReviewProps = {

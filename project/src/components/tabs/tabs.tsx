@@ -1,10 +1,7 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
-
-import {GuitarType} from '../../types/guitar';
-
+import {GuitarType} from '../../types/types';
 import {getTabsNames} from '../../utils';
-
 import TabCharacteristics from '../tabs/tab-characteristics';
 import TabDescription from '../tabs/tab-description';
 

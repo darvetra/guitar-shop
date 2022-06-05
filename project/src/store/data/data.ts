@@ -1,5 +1,5 @@
-import {ActionType, Actions} from '../types/action';
-import {State} from '../types/state';
+import {Data} from '../../types/state';
+import {ActionType, Actions} from '../../types/action';
 
 const initialState = {
   guitars: [],
@@ -9,7 +9,7 @@ const initialState = {
   isDataLoaded: false,
 };
 
-const reducer = (state: State = initialState, action: Actions): State => {
+export const data = (state: Data = initialState, action: Actions) : Data => {
   switch (action.type) {
     // case ActionType.GetProductList:
     //   return {...state, guitars: action.payload};
@@ -23,5 +23,3 @@ const reducer = (state: State = initialState, action: Actions): State => {
       return state;
   }
 };
-
-export {reducer};

@@ -1,4 +1,4 @@
-import {ReviewType} from '../../types/review';
+import {ReviewType} from '../../types/types';
 
 type ReviewProps = {
   review: ReviewType,
@@ -14,19 +14,19 @@ function Reviews({review}: ReviewProps): JSX.Element {
       </div>
       <div className="rate review__rating-panel">
         <svg width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
+          <use xlinkHref="#icon-full-star"/>
         </svg>
         <svg width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
+          <use xlinkHref="#icon-full-star"/>
         </svg>
         <svg width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
+          <use xlinkHref="#icon-full-star"/>
         </svg>
         <svg width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-full-star"></use>
+          <use xlinkHref="#icon-full-star"/>
         </svg>
         <svg width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#icon-star"></use>
+          <use xlinkHref="#icon-star"/>
         </svg>
         <p className="visually-hidden">Оценка: Хорошо</p>
       </div>

@@ -1,4 +1,4 @@
-import {GuitarType} from '../../types/guitar';
+import {GuitarType} from '../../types/types';
 
 type TabCharacteristicsProps = {
   currentProduct: GuitarType;

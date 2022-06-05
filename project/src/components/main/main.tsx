@@ -1,53 +1,37 @@
 import {Fragment} from 'react';
 import {Link} from 'react-router-dom';
-import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
-
-import {GuitarType} from '../../types/guitar';
-
-import {setProducts} from '../../store/action';
-
 import {State} from '../../types/state';
-import {Actions} from '../../types/action';
-
+import {getGuitars} from '../../store/data/selectors';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import Pagination from '../pagination/pagination';
-import ProductCard from '../product-card/product-card';
+// import Pagination from '../pagination/pagination';
+import CatalogCards from '../catalog-cards/catalog-cards';
 
-type MainScreenProps = {
-  products: GuitarType[];
-}
-
-const mapStateToProps = ({pageSize, totalProductsCount, currentPage}: State) => ({
-  pageSize,
-  totalProductsCount,
-  currentPage,
+const mapStateToProps = (state: State) => ({
+  guitars: getGuitars(state),
+  // pageSize,
+  // totalProductsCount,
+  // currentPage,
 });
 
-// Без использования bindActionCreators
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  onChangePage(products: GuitarType[]) {
-    dispatch(setProducts(products));
-  },
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & MainScreenProps;
+type ConnectedComponentProps = PropsFromRedux;
 
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
-  const {products, pageSize, totalProductsCount, currentPage} = props;
+  // const {guitars, pageSize, totalProductsCount, currentPage} = props;
+  const {guitars} = props;
 
-  const pagesCount = Math.ceil(totalProductsCount / pageSize);
-  const pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
+  // const pagesCount = Math.ceil(totalProductsCount / pageSize);
+  // const pages = [];
+  // for (let i = 1; i <= pagesCount; i++) {
+  //   pages.push(i);
+  // }
 
   // eslint-disable-next-line no-console
-  console.log(currentPage);
+  // console.log(currentPage);
 
   return (
     <Fragment>
@@ -128,13 +112,9 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
                 <button className="catalog-sort__order-button catalog-sort__order-button--down" aria-label="По убыванию"/>
               </div>
             </div>
-            <div className="cards catalog__cards">
 
-              {products.map((product) => <ProductCard product={product} key={product.id} />)}
-
-            </div>
-
-            <Pagination pages={pages} currentPage={currentPage} />
+            <CatalogCards guitars={guitars} />
+            {/*<Pagination pages={pages} currentPage={currentPage} />*/}
 
           </div>
         </div>

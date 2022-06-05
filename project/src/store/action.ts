@@ -1,5 +1,5 @@
 import {ActionType} from '../types/action';
-import {GuitarType} from '../types/guitar';
+import {GuitarType} from '../types/types';
 
 // export const getProductList = (guitars: GuitarType[]) => ({
 //   type: ActionType.GetProductList,

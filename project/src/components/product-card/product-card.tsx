@@ -1,24 +1,26 @@
 import {Link} from 'react-router-dom';
-
-// не работает useHistory, тубо белый экран, ничего не рендерится
-// import {useHistory} from 'react-router-dom';
-
+import {getImgPath} from '../../utils';
 import {AppRoute} from '../../const';
-
-import {GuitarType} from '../../types/guitar';
+import {GuitarType} from '../../types/types';
 
 type ProductCardProps = {
-  product: GuitarType;
+  guitar: GuitarType;
 }
 
-function ProductCard({product}: ProductCardProps): JSX.Element {
-  const {id, name, previewImage, price} = product;
+function ProductCard(props: ProductCardProps): JSX.Element {
+  const {guitar} = props;
+  const {id, name, previewImg, price} = guitar;
+  const imgPath = getImgPath(previewImg);
   // const history = useHistory();
+
+  // eslint-disable-next-line no-console
+  console.log(guitar);
 
   return (
     <div className="product-card">
       <img
-        src={previewImage} srcSet="img/content/catalog-product-0@2x.jpg 2x"
+        src={imgPath}
+        // srcSet="img/content/catalog-product-0@2x.jpg 2x"
         width="75"
         height="190"
         alt={name}
