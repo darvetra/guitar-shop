@@ -39,3 +39,13 @@ export const getRussianGuitarType = (type: string) => {
     }
   }
 };
+
+export const getPaginationPages = (totalProductsCount: number, pageSize: number) => {
+  const pagesCount = Math.ceil(totalProductsCount / pageSize);
+  const pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
+  }
+
+  return pages;
+};

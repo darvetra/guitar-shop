@@ -13,9 +13,6 @@ function ProductCard(props: ProductCardProps): JSX.Element {
   const imgPath = getImgPath(previewImg);
   // const history = useHistory();
 
-  // eslint-disable-next-line no-console
-  console.log(guitar);
-
   return (
     <div className="product-card">
       <img

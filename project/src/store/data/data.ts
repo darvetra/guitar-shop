@@ -7,6 +7,7 @@ const initialState = {
   totalProductsCount: 9,
   currentPage: 1,
   isDataLoaded: false,
+  pages: [],
 };
 
 export const data = (state: Data = initialState, action: Actions) : Data => {

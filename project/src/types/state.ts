@@ -6,6 +6,7 @@ export type Data = {
   pageSize: number,
   totalProductsCount: number,
   currentPage: number,
+  pages: number[],
   isDataLoaded: boolean,
 };
 

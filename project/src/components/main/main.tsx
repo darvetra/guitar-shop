@@ -5,14 +5,15 @@ import {State} from '../../types/state';
 import {getGuitars} from '../../store/data/selectors';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-// import Pagination from '../pagination/pagination';
+import Pagination from '../pagination/pagination';
 import CatalogCards from '../catalog-cards/catalog-cards';
+import {GUITARS_COUNT_PER_PAGE} from '../../const';
 
 const mapStateToProps = (state: State) => ({
   guitars: getGuitars(state),
-  // pageSize,
-  // totalProductsCount,
-  // currentPage,
+  pageSize: GUITARS_COUNT_PER_PAGE,
+  totalProductsCount: getGuitars(state).length,
+  currentPage: 2,
 });
 
 const connector = connect(mapStateToProps);
@@ -22,7 +23,8 @@ type ConnectedComponentProps = PropsFromRedux;
 
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
   // const {guitars, pageSize, totalProductsCount, currentPage} = props;
-  const {guitars} = props;
+  const {guitars, totalProductsCount, currentPage} = props;
+  // const {guitars} = props;
 
   // const pagesCount = Math.ceil(totalProductsCount / pageSize);
   // const pages = [];
@@ -31,7 +33,16 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
   // }
 
   // eslint-disable-next-line no-console
-  // console.log(currentPage);
+  // console.log(this.state.currentPage);
+
+  // eslint-disable-next-line no-console
+  console.log(guitars);
+
+  // eslint-disable-next-line no-console
+  console.log(totalProductsCount);
+
+  // eslint-disable-next-line no-console
+  console.log(currentPage);
 
   return (
     <Fragment>
@@ -115,6 +126,7 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
             <CatalogCards guitars={guitars} />
             {/*<Pagination pages={pages} currentPage={currentPage} />*/}
+            <Pagination />
 
           </div>
         </div>

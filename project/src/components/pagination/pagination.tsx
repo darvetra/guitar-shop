@@ -1,20 +1,43 @@
 import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-
-import {AppRoute} from '../../const';
+import {connect, ConnectedProps} from 'react-redux';
+import {AppRoute, GUITARS_COUNT_PER_PAGE} from '../../const';
 import {setCurrentPage} from '../../store/action';
+import {State} from '../../types/state';
+import {getGuitars} from '../../store/data/selectors';
+import {getPaginationPages} from '../../utils';
 
-type PaginationProps = {
-  pages: number[],
-  currentPage: number,
-}
+// type PaginationProps = {
+//   pages: number[],
+//   currentPage: number,
+// }
 
-function Pagination({pages, currentPage}: PaginationProps): JSX.Element {
+const mapStateToProps = (state: State) => ({
+  pages: getPaginationPages(getGuitars(state).length, GUITARS_COUNT_PER_PAGE),
+  currentPage: 3,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux;
+
+function Pagination(props: ConnectedComponentProps): JSX.Element {
+// function Pagination({pages, currentPage}: PaginationProps): JSX.Element {
+  const {pages, currentPage} = props;
+
   const dispatch = useDispatch();
 
   const onChangeCurrentPage = (pageNumber: number) => {
     dispatch(setCurrentPage(pageNumber));
+    // eslint-disable-next-line no-console
+    console.log('нажата кнопка с номером страницы');
+    // eslint-disable-next-line no-console
+    console.log(pageNumber);
   };
+
+  // eslint-disable-next-line no-console
+  console.log(pages);
 
   return (
     <div className="pagination page-content__pagination">
@@ -53,4 +76,6 @@ function Pagination({pages, currentPage}: PaginationProps): JSX.Element {
   );
 }
 
-export default Pagination;
+// export default Pagination;
+export {Pagination};
+export default connector(Pagination);
