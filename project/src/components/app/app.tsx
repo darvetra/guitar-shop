@@ -4,6 +4,7 @@ import MainScreen from '../main/main';
 import ProductPage from '../product-page/product-page';
 import NotFound from '../not-found/not-found';
 
+
 function App(): JSX.Element {
   return (
     <BrowserRouter>
