@@ -1,19 +1,22 @@
-import {Fragment} from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {connect, ConnectedProps} from 'react-redux';
 import {State} from '../../types/state';
 import {getGuitars} from '../../store/data/selectors';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import Pagination from '../pagination/pagination';
+// import Pagination from '../pagination/pagination';
 import CatalogCards from '../catalog-cards/catalog-cards';
-import {GUITARS_COUNT_PER_PAGE} from '../../const';
+import {AppRoute, GUITARS_COUNT_PER_PAGE} from '../../const';
+import {getPaginationPages} from '../../utils';
+import {startGuitarRange, endGuitarRange} from '../../utils';
 
 const mapStateToProps = (state: State) => ({
-  guitars: getGuitars(state),
+  // guitars: getGuitars(state),
   pageSize: GUITARS_COUNT_PER_PAGE,
-  totalProductsCount: getGuitars(state).length,
-  currentPage: 2,
+  // totalProductsCount: getGuitars(state).length,
+  // currentPage: 2,
+  pages: getPaginationPages(getGuitars(state).length, GUITARS_COUNT_PER_PAGE),
 });
 
 const connector = connect(mapStateToProps);
@@ -22,27 +25,36 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux;
 
 function MainScreen(props: ConnectedComponentProps): JSX.Element {
-  // const {guitars, pageSize, totalProductsCount, currentPage} = props;
-  const {guitars, totalProductsCount, currentPage} = props;
-  // const {guitars} = props;
+  const { pages } = props;
 
-  // const pagesCount = Math.ceil(totalProductsCount / pageSize);
-  // const pages = [];
-  // for (let i = 1; i <= pagesCount; i++) {
-  //   pages.push(i);
-  // }
-
-  // eslint-disable-next-line no-console
-  // console.log(this.state.currentPage);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [guitars, setGuitars] = useState([]);
 
   // eslint-disable-next-line no-console
   console.log(guitars);
+  // eslint-disable-next-line no-console
+  console.log(`currentPage: ${currentPage}`);
+  // eslint-disable-next-line no-console
+  console.log(`startGuitarRange: ${startGuitarRange(currentPage)}`);
+  // eslint-disable-next-line no-console
+  console.log(`endGuitarRange: ${endGuitarRange(currentPage)}`);
+
 
   // eslint-disable-next-line no-console
-  console.log(totalProductsCount);
-
+  console.log(`TEST startGuitarRange: ${startGuitarRange(2)}`);
   // eslint-disable-next-line no-console
-  console.log(currentPage);
+  console.log(`TEST endGuitarRange: ${endGuitarRange(2)}`);
+
+  useEffect(() => {
+    fetch(`https://guitar-shop.accelerator.pages.academy/guitars?_start=${startGuitarRange(currentPage)}&_end=${endGuitarRange(currentPage)}`)
+      .then((response) => response.json())
+      .then((json) => {
+        setGuitars(json);
+      });
+
+    // eslint-disable-next-line no-console
+    return () => console.log(`currentPage(useEffect): ${currentPage}`);
+  }, [currentPage]);
 
   return (
     <Fragment>
@@ -126,7 +138,27 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
             <CatalogCards guitars={guitars} />
             {/*<Pagination pages={pages} currentPage={currentPage} />*/}
-            <Pagination />
+            {/*<Pagination />*/}
+
+            <div className="pagination page-content__pagination">
+              <ul className="pagination__list">
+
+                {pages.map(
+                  (page) => (
+                    <li key={page} className={`pagination__page ${currentPage === page && 'pagination__page--active'}`}>
+                      <Link
+                        to={`${AppRoute.CatalogPathPart}${page}`}
+                        className="link pagination__page-link"
+                        onClick={(evt) => setCurrentPage(Number(evt.currentTarget.innerText))}
+                      >
+                        {page}
+                      </Link>
+                    </li>
+                  ),
+                )}
+
+              </ul>
+            </div>
 
           </div>
         </div>

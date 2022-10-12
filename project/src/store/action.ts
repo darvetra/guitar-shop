@@ -16,6 +16,7 @@ export const setProducts = (guitars: GuitarType[]) => ({
   payload: guitars,
 } as const);
 
+// Нужно ли оно еще? Проведи потом ревизию
 export const setCurrentPage = (currentPage: number) => ({
   type: ActionType.SetCurrentPage,
   payload: currentPage,
