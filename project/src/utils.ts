@@ -1,4 +1,4 @@
-import {TabsParams, GuitarType, RussianGuitarType} from './const';
+import {TabsParams, GuitarType, RussianGuitarType, GUITARS_COUNT_PER_PAGE} from './const';
 
 /**
  * Возвращает наименование вкладок в "человенческом" виде
@@ -40,6 +40,11 @@ export const getRussianGuitarType = (type: string) => {
   }
 };
 
+/**
+ * Возврашает количество страниц (пагинация)
+ * @param totalProductsCount
+ * @param pageSize
+ */
 export const getPaginationPages = (totalProductsCount: number, pageSize: number) => {
   const pagesCount = Math.ceil(totalProductsCount / pageSize);
   const pages = [];
@@ -49,3 +54,23 @@ export const getPaginationPages = (totalProductsCount: number, pageSize: number)
 
   return pages;
 };
+
+/**
+ * Возвращает начало диапазона пагинации
+ * @param currentPage
+ */
+export const startGuitarRange = (currentPage : number) => {
+  let startRange = 0;
+
+  if (currentPage > 1) {
+    startRange = (currentPage - 1) * GUITARS_COUNT_PER_PAGE;
+  }
+
+  return startRange;
+};
+
+/**
+ * Возвращает конец диапазона пагинации
+ * @param currentPage
+ */
+export const endGuitarRange = (currentPage : number) =>  currentPage * (GUITARS_COUNT_PER_PAGE);
