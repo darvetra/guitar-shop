@@ -5,17 +5,13 @@ import {State} from '../../types/state';
 import {getGuitars} from '../../store/data/selectors';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-// import Pagination from '../pagination/pagination';
 import CatalogCards from '../catalog-cards/catalog-cards';
 import {AppRoute, GUITARS_COUNT_PER_PAGE} from '../../const';
 import {getPaginationPages} from '../../utils';
 import {startGuitarRange, endGuitarRange} from '../../utils';
 
 const mapStateToProps = (state: State) => ({
-  // guitars: getGuitars(state),
   pageSize: GUITARS_COUNT_PER_PAGE,
-  // totalProductsCount: getGuitars(state).length,
-  // currentPage: 2,
   pages: getPaginationPages(getGuitars(state).length, GUITARS_COUNT_PER_PAGE),
 });
 
@@ -29,21 +25,6 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [guitars, setGuitars] = useState([]);
-
-  // eslint-disable-next-line no-console
-  console.log(guitars);
-  // eslint-disable-next-line no-console
-  console.log(`currentPage: ${currentPage}`);
-  // eslint-disable-next-line no-console
-  console.log(`startGuitarRange: ${startGuitarRange(currentPage)}`);
-  // eslint-disable-next-line no-console
-  console.log(`endGuitarRange: ${endGuitarRange(currentPage)}`);
-
-
-  // eslint-disable-next-line no-console
-  console.log(`TEST startGuitarRange: ${startGuitarRange(2)}`);
-  // eslint-disable-next-line no-console
-  console.log(`TEST endGuitarRange: ${endGuitarRange(2)}`);
 
   useEffect(() => {
     fetch(`https://guitar-shop.accelerator.pages.academy/guitars?_start=${startGuitarRange(currentPage)}&_end=${endGuitarRange(currentPage)}`)
@@ -137,8 +118,8 @@ function MainScreen(props: ConnectedComponentProps): JSX.Element {
             </div>
 
             <CatalogCards guitars={guitars} />
-            {/*<Pagination pages={pages} currentPage={currentPage} />*/}
-            {/*<Pagination />*/}
+
+            {         /*   Пагинация   */        }
 
             <div className="pagination page-content__pagination">
               <ul className="pagination__list">
