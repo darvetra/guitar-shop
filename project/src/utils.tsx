@@ -74,3 +74,33 @@ export const startGuitarRange = (currentPage : number) => {
  * @param currentPage
  */
 export const endGuitarRange = (currentPage : number) =>  currentPage * (GUITARS_COUNT_PER_PAGE);
+
+
+/**
+ * Возвращает рейтинг товара/комментария в графическом формате
+ * @param ratingValue
+ */
+export const getStarRating = (ratingValue: number) => {
+
+  const calcRating = Math.round(ratingValue);
+  const remainingRating = 5 - calcRating;
+  const stars = [];
+
+  for (let i = 0; i < calcRating; i++) {
+    stars.push(
+      <svg width="14" height="14" aria-hidden="true">
+        <use xlinkHref="#icon-full-star" />
+      </svg>,
+    );
+  }
+
+  for (let i = 0; i < remainingRating; i++) {
+    stars.push(
+      <svg width="14" height="14" aria-hidden="true">
+        <use xlinkHref="#icon-star" />
+      </svg>,
+    );
+  }
+
+  return stars;
+};

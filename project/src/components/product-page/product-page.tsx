@@ -10,7 +10,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import NotFound from '../not-found/not-found';
 
 import {AppRoute, LoadingStatus} from '../../const';
-import {getImgPath} from '../../utils';
+import {getImgPath, getStarRating} from '../../utils';
 // import {getRussianGuitarType} from "../../utils";
 
 function ProductPage(): JSX.Element {
@@ -36,7 +36,7 @@ function ProductPage(): JSX.Element {
     return <LoadingScreen />;
   }
 
-  const {name, previewImg, price} = guitar;
+  const {name, previewImg, price, rating} = guitar;
 
   const imgPath = getImgPath(previewImg);
   // const russianGuitarType = getRussianGuitarType(type);
@@ -68,21 +68,9 @@ function ProductPage(): JSX.Element {
           <div className="product-container__info-wrapper">
             <h2 className="product-container__title title title--big title--uppercase">{name}</h2>
             <div className="rate product-container__rating">
-              <svg width="14" height="14" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"/>
-              </svg>
-              <svg width="14" height="14" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"/>
-              </svg>
-              <svg width="14" height="14" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"/>
-              </svg>
-              <svg width="14" height="14" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"/>
-              </svg>
-              <svg width="14" height="14" aria-hidden="true">
-                <use xlinkHref="#icon-star"/>
-              </svg>
+
+              { getStarRating(rating) }
+
               <p className="visually-hidden">Оценка: Хорошо</p>
             </div>
 
