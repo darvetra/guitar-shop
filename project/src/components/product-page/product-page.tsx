@@ -11,7 +11,7 @@ import NotFound from '../not-found/not-found';
 
 import {AppRoute, LoadingStatus} from '../../const';
 import {getImgPath, getStarRating} from '../../utils';
-// import {getRussianGuitarType} from "../../utils";
+
 
 function ProductPage(): JSX.Element {
   const params: ParamsType = useParams();
@@ -39,7 +39,7 @@ function ProductPage(): JSX.Element {
   const {name, previewImg, price, rating} = guitar;
 
   const imgPath = getImgPath(previewImg);
-  // const russianGuitarType = getRussianGuitarType(type);
+
 
   return (
     <main className="page-content">
@@ -68,9 +68,7 @@ function ProductPage(): JSX.Element {
           <div className="product-container__info-wrapper">
             <h2 className="product-container__title title title--big title--uppercase">{name}</h2>
             <div className="rate product-container__rating">
-
               { getStarRating(rating) }
-
               <p className="visually-hidden">Оценка: Хорошо</p>
             </div>
 
