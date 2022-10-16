@@ -2,6 +2,7 @@ export const BACKEND_URL = 'https://guitar-shop.accelerator.pages.academy';
 export const REQUEST_TIMEOUT = 5000;
 export const FAIL_MESSAGE = 'Что-то пошло не так, сервер не отвечает. Приносим извинения за доставленные неудобства.';
 export const GUITARS_COUNT_PER_PAGE = 9;
+export const REVIEWS_COUNT_PER_STEP = 3;
 
 export enum LoadingStatus {
   Loading = 'loading',
