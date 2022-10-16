@@ -82,7 +82,7 @@ function ProductPage(): JSX.Element {
           </div>
         </div>
 
-        <Reviews reviews={reviews} />
+        <Reviews reviews={reviews} guitarName={name} />
 
       </div>
     </main>
