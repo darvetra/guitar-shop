@@ -1,14 +1,29 @@
-
+import {GuitarType} from '../../types/types';
+// import {APIRoute} from '../../const';
 
 type ModalReviewProps = {
-  guitarName: string,
+  guitar: GuitarType,
   active: any,
   setActive: any,
 }
 
 
 function ModalReview(props: ModalReviewProps): JSX.Element {
-  const { guitarName, active, setActive } = props;
+  const { guitar, active, setActive } = props;
+  const { name } = guitar;
+
+  // const sendReview = async () => {
+  //   try {
+  //     const {data} = await api.post(
+  //       `${APIRoute.NewComment}/${id}`,
+  //       {comment, rating}
+  //     );
+  //     resetForm();
+  //     updateReviews(data);
+  //   } catch {
+  //     setIsDisabled(false);
+  //   }
+  // };
 
 
   return (
@@ -22,7 +37,7 @@ function ModalReview(props: ModalReviewProps): JSX.Element {
         </div>
         <div className="modal__content">
           <h2 className="modal__header modal__header--review title title--medium">Оставить отзыв</h2>
-          <h3 className="modal__product-name title title--medium-20 title--uppercase">{guitarName}</h3>
+          <h3 className="modal__product-name title title--medium-20 title--uppercase">{name}</h3>
           <form className="form-review">
             <div className="form-review__wrapper">
               <div className="form-review__name-wrapper">

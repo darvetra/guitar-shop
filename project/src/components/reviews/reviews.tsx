@@ -4,18 +4,18 @@ import {Link} from 'react-router-dom';
 import Review from './review';
 import ModalReview from '../modal-review/modal-review';
 
-import {ReviewType} from '../../types/types';
+import {ReviewType, GuitarType} from '../../types/types';
 
 import {REVIEWS_COUNT_PER_STEP} from '../../const';
 
 type ReviewProps = {
   reviews: ReviewType[],
-  guitarName: string,
+  guitar: GuitarType,
 }
 
 
 function Reviews(props: ReviewProps): JSX.Element {
-  const { reviews, guitarName } = props;
+  const { reviews, guitar } = props;
 
   // Модальное окно "Оставить отзыв"
   const [modalActive, setModalActive] = useState(true);
@@ -77,7 +77,7 @@ function Reviews(props: ReviewProps): JSX.Element {
         <Link className="button button--up button--red-border button--big reviews__up-button" to="#header">Наверх</Link>
       </section>
 
-      <ModalReview guitarName={guitarName} active={modalActive} setActive={setModalActive} />
+      <ModalReview guitar={guitar} active={modalActive} setActive={setModalActive} />
     </Fragment>
   );
 }
