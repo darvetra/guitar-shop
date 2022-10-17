@@ -1,20 +1,32 @@
-import {useParams} from 'react-router-dom';
-import {Link} from 'react-router-dom';
-// import Reviews from '../reviews/reviews';
-// import Tabs from '../tabs/tabs';
-import {ParamsType} from '../../types/types';
+import {useEffect, useState} from 'react';
+import {useParams, Link} from 'react-router-dom';
+
 import {useFetchGuitar} from '../../hooks/use-fetch-guitar';
-import {AppRoute, LoadingStatus} from '../../const';
-// import {getRussianGuitarType} from "../../utils";
-import {getImgPath} from '../../utils';
+import {ParamsType} from '../../types/types';
+
+import Reviews from '../reviews/reviews';
+import Tabs from '../tabs/tabs';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFound from '../not-found/not-found';
+
+import {AppRoute, LoadingStatus} from '../../const';
+import {getImgPath, getStarRating} from '../../utils';
+
 
 function ProductPage(): JSX.Element {
   const params: ParamsType = useParams();
   const currentGuitarId = params.id;
 
   const {guitar, loadStatus} = useFetchGuitar(currentGuitarId);
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://guitar-shop.accelerator.pages.academy/guitars/${currentGuitarId}/comments`)
+      .then((response) => response.json())
+      .then((json) => {
+        setReviews(json);
+      });
+  }, []);
 
   if (guitar === null && loadStatus === LoadingStatus.Loading) {
     return <LoadingScreen />;
@@ -24,11 +36,10 @@ function ProductPage(): JSX.Element {
     return <LoadingScreen />;
   }
 
-  // const {previewImg, name, type, description, vendorCode, stringCount, price} = guitar;
-  const {name, previewImg, price} = guitar;
+  const {name, previewImg, price, rating} = guitar;
 
   const imgPath = getImgPath(previewImg);
-  // const russianGuitarType = getRussianGuitarType(type);
+
 
   return (
     <main className="page-content">
@@ -57,25 +68,11 @@ function ProductPage(): JSX.Element {
           <div className="product-container__info-wrapper">
             <h2 className="product-container__title title title--big title--uppercase">{name}</h2>
             <div className="rate product-container__rating">
-              <svg width="14" height="14" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"/>
-              </svg>
-              <svg width="14" height="14" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"/>
-              </svg>
-              <svg width="14" height="14" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"/>
-              </svg>
-              <svg width="14" height="14" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"/>
-              </svg>
-              <svg width="14" height="14" aria-hidden="true">
-                <use xlinkHref="#icon-star"/>
-              </svg>
+              { getStarRating(rating) }
               <p className="visually-hidden">Оценка: Хорошо</p>
             </div>
 
-            {/*<Tabs currentProduct={product} />*/}
+            <Tabs currentProduct={guitar} />
 
           </div>
           <div className="product-container__price-wrapper">
@@ -85,7 +82,7 @@ function ProductPage(): JSX.Element {
           </div>
         </div>
 
-        {/*<Reviews reviews={reviews} />*/}
+        <Reviews reviews={reviews} guitar={guitar} />
 
       </div>
     </main>
